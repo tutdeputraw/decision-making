@@ -34,9 +34,9 @@ class ExpectedCalculatePageController extends GetxController {
 
   void hitungOnClick() {
     print('textEditingController[1][1].text: ' +
-        textEditingController[1][1].text);
+        textEditingController[1][2].text);
     print('textEditingController[2][2].text: ' +
-        textEditingController[2][2].text);
+        textEditingController[2][1].text);
   }
 
   String calculatePayoff(String kesediaan) {

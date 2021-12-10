@@ -23,9 +23,22 @@ class ExpectedCalculatePageView extends StatelessWidget {
               if (index1 != 0) {
                 return Row(
                   children: List.generate(
-                    controller.getCriteriaLength + 1,
+                    controller.getCriteriaLength + 2,
                     (index) {
-                      if (index != 0) {
+                      if (index == controller.getCriteriaLength + 1) {
+                        return Expanded(
+                          child: TextFormField(
+                            readOnly: true,
+                            initialValue: '5',
+                            textAlign: TextAlign.center,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.all(0),
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                        );
+                      } else if (index != 0) {
                         return Expanded(
                           child: TextFormField(
                             readOnly:
@@ -53,14 +66,15 @@ class ExpectedCalculatePageView extends StatelessWidget {
                             ),
                           ),
                         );
+                      } else {
+                        return Expanded(
+                          flex: -1,
+                          child: Container(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: Text('Alternatif ${index1 + 1}'),
+                          ),
+                        );
                       }
-                      return Expanded(
-                        flex: -1,
-                        child: Container(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: Text('Alternatif ${index1 + 1}'),
-                        ),
-                      );
                     },
                   ),
                 );
@@ -87,17 +101,34 @@ class ExpectedCalculatePageView extends StatelessWidget {
                       Expanded(
                         child: Row(
                           children: List.generate(
-                            controller.getCriteriaLength,
-                            (index) => Expanded(
-                              child: Column(
-                                children: [
-                                  Text(controller.criteriaAndProbability[index]
-                                      .probability.value.text),
-                                  Text(controller.criteriaAndProbability[index]
-                                      .criteria.value.text),
-                                ],
-                              ),
-                            ),
+                            controller.getCriteriaLength + 1,
+                            (index) {
+                              if (index != controller.getCriteriaLength) {
+                                return Expanded(
+                                  child: Column(
+                                    children: [
+                                      Text(controller
+                                          .criteriaAndProbability[index]
+                                          .probability
+                                          .value
+                                          .text),
+                                      Text(controller
+                                          .criteriaAndProbability[index]
+                                          .criteria
+                                          .value
+                                          .text),
+                                    ],
+                                  ),
+                                );
+                              } else {
+                                return const Expanded(
+                                  child: Text(
+                                    'Expected Return',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                );
+                              }
+                            },
                           ),
                         ),
                       )
