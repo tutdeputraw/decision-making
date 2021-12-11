@@ -8,10 +8,14 @@ class ExpectedCalculatePageController extends GetxController {
       Get.put(CriteriaAndProbabilityController()).data;
 
   void goToPage() {
+    print('dataSet.jumlahAlternatif.textss: ' +
+        int.parse(dataSet.jumlahAlternatif.text).toString());
+    print(criteriaAndProbability.length + 1);
     textEditingController = List.generate(
-      criteriaAndProbability.length + 1,
+      // criteriaAndProbability.length + 1,
+      int.parse(dataSet.jumlahAlternatif.text) + 2,
       (indexA) => List.generate(
-        criteriaAndProbability.length + 1,
+        criteriaAndProbability.length + 2,
         (indexB) {
           return TextEditingController(text: '0');
         },
@@ -34,9 +38,28 @@ class ExpectedCalculatePageController extends GetxController {
 
   void hitungOnClick() {
     print('textEditingController[1][1].text: ' +
-        textEditingController[1][2].text);
+        textEditingController[1][1].text);
     print('textEditingController[2][2].text: ' +
-        textEditingController[2][1].text);
+        textEditingController[2][2].text);
+    calculateExpectedReturn();
+  }
+
+  void calculateExpectedReturn() {
+    for (int i = 1; i < int.parse(dataSet.jumlahAlternatif.text) + 2; i++) {
+      double attempt = 0;
+      for (int j = 1; j < criteriaAndProbability.length + 2; j++) {
+        if (j <= criteriaAndProbability.length) {
+          attempt+= double.parse(textEditingController[i][j].text) * double.parse(criteriaAndProbability[j - 1].probability.text);
+          print(
+              'i=$i j=$j \t ${textEditingController[i][j].text}\t probabilitas: ${criteriaAndProbability[j - 1].probability.text}');
+        }
+        if(j == criteriaAndProbability.length + 1){
+          textEditingController[i][j].text=attempt.toString();
+          update();
+        }
+      }
+      print('\n');
+    }
   }
 
   String calculatePayoff(String kesediaan) {
