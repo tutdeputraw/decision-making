@@ -19,7 +19,8 @@ class ExpectedCalculatePageView extends StatelessWidget {
             ListView.separated(
               shrinkWrap: true,
               padding: const EdgeInsets.all(8),
-              itemCount: int.parse(controller.dataSet.jumlahAlternatif.text) + 1,
+              itemCount:
+                  int.parse(controller.dataSet.jumlahAlternatif.text) + 1,
               itemBuilder: (context, index1) {
                 if (index1 != 0) {
                   return Row(
@@ -31,8 +32,8 @@ class ExpectedCalculatePageView extends StatelessWidget {
                             child: TextFormField(
                               readOnly: true,
                               // initialValue: '5',
-                              controller: controller.textEditingController[index1]
-                                  [index],
+                              controller: controller
+                                  .textEditingController[index1][index],
                               textAlign: TextAlign.center,
                               keyboardType: TextInputType.number,
                               decoration: const InputDecoration(
@@ -44,8 +45,9 @@ class ExpectedCalculatePageView extends StatelessWidget {
                         } else if (index != 0) {
                           return Expanded(
                             child: TextFormField(
-                              readOnly:
-                                  index1 == index || (index1 == 0) ? true : false,
+                              readOnly: index1 == index || (index1 == 0)
+                                  ? true
+                                  : false,
                               controller: index1 == index || (index1 == 0)
                                   ? controller.setTextEditing(index1, index)
                                   : controller.textEditingController[index1]
@@ -74,7 +76,7 @@ class ExpectedCalculatePageView extends StatelessWidget {
                             flex: -1,
                             child: Container(
                               padding: const EdgeInsets.only(right: 8),
-                              child: Text('Alternatif ${index1 + 1}'),
+                              child: Text('Alternatif ${index1}'),
                             ),
                           );
                         }
@@ -152,56 +154,10 @@ class ExpectedCalculatePageView extends StatelessWidget {
                 onPressed: controller.hitungOnClick,
                 child: const Text('HITUNG'),
               ),
-            )
+            ),
           ],
         ),
       ),
-      // body: SingleChildScrollView(
-      //   child: Column(children: [
-      //     ListView.separated(
-      //       padding: const EdgeInsets.all(16),
-      //       shrinkWrap: true,
-      //       itemCount: controller.getCriteriaLength,
-      //       itemBuilder: (context, index) => Column(
-      //         crossAxisAlignment: CrossAxisAlignment.stretch,
-      //         children: [
-      //           Text(
-      //             'Alternatif $index',
-      //             style: const TextStyle(
-      //               fontWeight: FontWeight.bold,
-      //             ),
-      //           ),
-      //           const SizedBox(height: 8),
-      //           Row(
-      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //             children: [
-      //               const Text('Diagonal pay off'),
-      //               Text(
-      //                 controller.calculatePayoff(controller
-      //                     .criteriaAndProbability[index].criteria.text),
-      //               )
-      //             ],
-      //           ),
-      //           const SizedBox(height: 8),
-      //           Row(
-      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //             children: [
-      //               const Text('Expected return'),
-      //               Text(
-      //                 controller.calculatePayoff(controller
-      //                     .criteriaAndProbability[index].criteria.text),
-      //               )
-      //             ],
-      //           ),
-      //         ],
-      //       ),
-      //       separatorBuilder: (context, index) => const Divider(
-      //         height: 16,
-      //         color: Colors.transparent,
-      //       ),
-      //     ),
-      //   ]),
-      // ),
     );
   }
 }
